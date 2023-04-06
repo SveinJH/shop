@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 
-export default function Contact() {
+export default function ContactPage() {
     return (
         <div className={styles.contact}>
             <h3>Kontakt</h3>

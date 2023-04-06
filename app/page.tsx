@@ -2,10 +2,10 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
+export default async function App() {
     return (
         <div className={styles.page}>
             <span className={styles.logo}>Nikkel</span>
