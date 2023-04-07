@@ -1,5 +1,8 @@
+import { GiveCouponsButton } from "@/components/give-coupons-button";
 import { ListItem } from "@/components/list-item";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { db } from "@/utils/db";
+import { getServerSession } from "next-auth";
 import { getRole } from "../../layout";
 
 async function getUser(id: string) {
@@ -30,6 +33,7 @@ export default async function UserPage({
 }: {
     params: { userId: string };
 }) {
+    const session = await getServerSession(authOptions);
     const user = await getUser(params.userId);
 
     if (!user)
@@ -40,8 +44,20 @@ export default async function UserPage({
     return (
         <div className="m-4 text-center">
             <h2 className="text-2xl">{user.name}</h2>
-            <h3 className="text-sm font-bold mb-2">{getRole(user.role)}</h3>
-            <h3 className="text-xl">{user.coupons} kuponger</h3>
+            {user.name && (
+                <h3 className="text-sm font-bold mb-2">
+                    {getRole(user.role, user.name)}
+                </h3>
+            )}
+            <h3 className="text-xl">
+                {user.coupons} kuponger{" "}
+                {session?.user.role === "admin" && (
+                    <GiveCouponsButton
+                        userId={params.userId}
+                        name={user.name}
+                    />
+                )}
+            </h3>
             <h4 className="text-center text-lg mt-6">Drikkeoversikt</h4>
             <div>
                 {transactions.map((t, i) => (

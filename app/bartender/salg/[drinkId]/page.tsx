@@ -1,6 +1,8 @@
 import { ListItem } from "@/components/list-item";
 import { SellActions } from "@/components/sell-actions";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { db } from "@/utils/db";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 async function getUser(id: string) {
@@ -30,6 +32,14 @@ export default async function DrinkSalesPage({
     params: { drinkId: string };
     searchParams: { [key: string]: string | string[] | undefined };
 }) {
+    const session = await getServerSession(authOptions);
+
+    const role = session?.user.role;
+
+    if (role !== "bartender" && role !== "admin") {
+        redirect("/");
+    }
+
     const userId = searchParams["id"];
 
     if (!userId || typeof userId !== "string") {

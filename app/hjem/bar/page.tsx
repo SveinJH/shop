@@ -1,4 +1,7 @@
+import { BarContent } from "@/components/bar-content";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { db } from "@/utils/db";
+import { getServerSession } from "next-auth";
 
 async function getDrinks() {
     const drinks = await db.drink.findMany({
@@ -13,27 +16,14 @@ async function getDrinks() {
 }
 
 export default async function BarPage() {
+    const session = await getServerSession(authOptions);
     const drinks = await getDrinks();
 
     if (!drinks) return <div>Fant ingen tilgjengelige drinker</div>;
 
     return (
-        <div className="grid grid-cols-2 text-center gap-4 mx-4">
-            {drinks.map(drink => {
-                return (
-                    <button
-                        key={drink.id}
-                        className="border border-gray-700 py-2 bg-gray-800"
-                        // SHOW QR
-                        // onClick={}
-                    >
-                        <h3 className="text-lg mb-1">{drink.name}</h3>
-                        <h4 className="text-gray-300">
-                            {drink.price} kuponger
-                        </h4>
-                    </button>
-                );
-            })}
+        <div>
+            <BarContent drinks={drinks} userId={session?.user.id} />
         </div>
     );
 }

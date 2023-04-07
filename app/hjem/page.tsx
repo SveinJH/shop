@@ -1,11 +1,11 @@
 import Link from "next/link";
 import {
     BuildingStorefrontIcon,
-    CalendarIcon,
     ClockIcon,
     ListBulletIcon,
-    PaperAirplaneIcon,
-    ShoppingCartIcon,
+    PlusIcon,
+    ShoppingBagIcon,
+    TrophyIcon,
 } from "@heroicons/react/24/solid";
 
 type NavigationItem = {
@@ -18,34 +18,34 @@ const navigationItems: NavigationItem[] = [
     {
         text: "Oversikt",
         href: "/hjem/oversikt",
-        Icon: <ListBulletIcon className="h-16" />,
+        Icon: <ListBulletIcon className="h-16 text-yellow-600" />,
     },
     {
         text: "Bar",
         href: "/hjem/bar",
-        Icon: <BuildingStorefrontIcon className="h-16" />,
+        Icon: <BuildingStorefrontIcon className="h-16 text-yellow-600" />,
     },
     {
-        text: "Hendelser",
-        href: "/hjem/hendelser",
-        Icon: <CalendarIcon className="h-16" />,
+        text: "Konkurranser",
+        href: "/hjem/konkurranser",
+        Icon: <TrophyIcon className="h-16 text-yellow-600" />,
     },
     {
         text: "Historikk",
         href: "/hjem/historikk",
-        Icon: <ClockIcon className="h-16" />,
+        Icon: <ClockIcon className="h-16 text-yellow-600" />,
     },
     {
-        text: "Send",
-        href: "/hjem/send",
-        Icon: <PaperAirplaneIcon className="h-16" />,
+        text: "Kuponger",
+        href: "/hjem/kuponger",
+        Icon: <ShoppingBagIcon className="h-16 text-yellow-600" />,
     },
 ];
 
 export default async function HomePage() {
     return (
         <div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mx-4">
                 {navigationItems.map(navItem => {
                     return (
                         <Link

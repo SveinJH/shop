@@ -10,7 +10,7 @@ type QRButtonProps = {
 export const QRButton: React.FC<QRButtonProps> = ({ id }) => {
     const [showQR, setShowQR] = useState(false);
 
-    const value = `http://localhost:3000/bartender/salg?id=${id}`;
+    const value = `http://nikkel.hoie.dev/bartender/salg?id=${id}`;
 
     return (
         <div>

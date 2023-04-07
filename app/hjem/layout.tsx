@@ -1,4 +1,3 @@
-import { QRButton } from "@/components/qr-button";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -26,9 +25,13 @@ export default async function HomeLayout({
                 <div className="flex justify-between">
                     <div>
                         {name && <h3 className="text-xl">{name}</h3>}
-                        <h3 className="text-sm font-bold">{getRole(role)}</h3>
+                        {name && (
+                            <h3 className="text-sm font-bold">
+                                {getRole(role, name)}
+                            </h3>
+                        )}
                     </div>
-                    <QRButton id={session.user.id} />
+                    {/* <QRButton id={session.user.id} /> */}
                 </div>
                 <div className="flex justify-between items-center mt-4">
                     <h4 className="text-lg">Mine kuponger</h4>
@@ -40,12 +43,33 @@ export default async function HomeLayout({
     );
 }
 
-export function getRole(role: string) {
+export function getRole(role: string, name: string) {
     switch (role) {
-        case "admin":
-            return "Administrator";
         case "user":
-            return "Fyllik";
+            return "Administrator";
+        case "admin":
+            const synonyms = [
+                "Alkoholiker",
+                "Drunkard",
+                "Drukkenbolt",
+                "Brannert",
+                "Fyllepen",
+                "Drikker",
+                "Drikkfeldig",
+                "Fyllebøtte",
+                "Suppegjøk",
+                "Spritfantom",
+                "Rusmisbruker",
+                "Svirebror",
+                "Sjangler",
+                "Beruset person",
+                "Sluske",
+                "Trønderfyllik",
+                "Humlefylt",
+                "Fyllenerd",
+            ];
+            const synonymIndex = name.length % synonyms.length;
+            return synonyms[synonymIndex];
         case "bartender":
             return "Bartender";
         default:
