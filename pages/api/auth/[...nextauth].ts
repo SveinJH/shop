@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
             name: "Vipps",
             type: "oauth",
             wellKnown:
-                "https://apitest.vipps.no/access-management-1.0/access/.well-known/openid-configuration",
+                "https://api.vipps.no/access-management-1.0/access/.well-known/openid-configuration",
             authorization: {
                 params: { scope: "openid phoneNumber name" },
             },
@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
             userinfo: {
                 async request(context) {
                     const data = await fetch(
-                        "https://apitest.vipps.no/vipps-userinfo-api/userinfo",
+                        "https://api.vipps.no/vipps-userinfo-api/userinfo",
                         {
                             headers: {
                                 authorization: `Bearer ${context.tokens.access_token}`,
