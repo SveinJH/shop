@@ -45,9 +45,9 @@ export default async function HomeLayout({
 
 export function getRole(role: string, name: string) {
     switch (role) {
-        case "user":
-            return "Administrator";
         case "admin":
+            return "Administrator";
+        case "user":
             const synonyms = [
                 "Alkoholiker",
                 "Drunkard",
