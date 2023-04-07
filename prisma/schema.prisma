@@ -59,10 +59,11 @@ model VerificationToken {
 }
 
 model Drink {
-  id      String @id @default(cuid())
-  name    String @unique
-  price   Int
-  transactions Transaction[]
+  id            String @id @default(cuid())
+  name          String @unique
+  price         Int
+  happyHour     Boolean @default(false)
+  transactions  Transaction[]
 }
 
 model Transaction {

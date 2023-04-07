@@ -1,9 +1,7 @@
+import { db } from "@/utils/db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
-
-const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
@@ -21,7 +19,6 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.VIPPS_CLIENT_SECRET,
             checks: ["state"],
             profile(profile) {
-                console.log("profile", profile);
                 return {
                     id: profile.sub,
                     name: profile.name,
@@ -40,8 +37,6 @@ export const authOptions: NextAuthOptions = {
                         }
                     );
                     const response = await data.json();
-                    console.log("response", response);
-
                     return response;
                 },
             },
@@ -51,7 +46,7 @@ export const authOptions: NextAuthOptions = {
         async redirect() {
             return "/hjem";
         },
-        async session({ session, token, user }) {
+        async session({ session, user }) {
             session.user.role = user.role;
             session.user.coupons = user.coupons;
             session.user.id = user.id;
@@ -59,7 +54,7 @@ export const authOptions: NextAuthOptions = {
             return session;
         },
     },
-    adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(db),
 };
 
 export default NextAuth(authOptions);

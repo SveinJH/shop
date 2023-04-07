@@ -21,20 +21,43 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
         }
     };
 
+    const happyHourDrinks = drinks?.filter(drink => drink.happyHour) ?? [];
+
     return (
         <>
+            {happyHourDrinks.length > 0 && (
+                <div className="text-center mb-4 bg-green-600">
+                    <h3>Nå er det Happy Hour på</h3>
+                    <div>
+                        {happyHourDrinks.map(d => {
+                            return (
+                                <p className="text-sm" key={d.id}>
+                                    {d.name}
+                                </p>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
             <div className="grid grid-cols-2 text-center gap-4 mx-4">
                 {drinks?.map(drink => {
                     return (
                         <button
                             key={drink.id}
                             className="border border-gray-700 py-2 bg-gray-800"
-                            // SHOW QR
                             onClick={() => handleClick(drink)}
                         >
                             <h3 className="text-lg mb-1">{drink.name}</h3>
                             <h4 className="text-gray-300">
-                                {drink.price} bonger
+                                <span
+                                    className={`${
+                                        drink.happyHour && "line-through"
+                                    }`}
+                                >
+                                    {drink.price}
+                                </span>
+                                {drink.happyHour && ` ${drink.price - 1}`}{" "}
+                                bonger
                             </h4>
                         </button>
                     );
@@ -47,7 +70,7 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
                 >
                     <h2 className="text-3xl mb-2">{drink.name}</h2>
                     <h2 className="text-xl mb-8 font-bold">
-                        {drink.price} bonger
+                        {drink.happyHour ? drink.price - 1 : drink.price} bonger
                     </h2>
                     <QRCode value={qrValue} />
                     <button

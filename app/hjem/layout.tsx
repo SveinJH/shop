@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 export default async function HomeLayout({
-    children, // will be a page or nested layout
+    children,
 }: {
     children: React.ReactNode;
 }) {
@@ -21,7 +21,7 @@ export default async function HomeLayout({
             <nav className="m-4">
                 <h1 className="text-3xl">Innflyttingsfiesta</h1>
             </nav>
-            <section className="m-4 my-8 border border-gray-200 p-4 rounded-lg shadow bg-gray-900">
+            <section className="m-4 my-6 border border-gray-200 p-4 rounded-lg shadow bg-gray-900">
                 <div className="flex justify-between">
                     <div>
                         {name && <h3 className="text-xl">{name}</h3>}
@@ -31,7 +31,6 @@ export default async function HomeLayout({
                             </h3>
                         )}
                     </div>
-                    {/* <QRButton id={session.user.id} /> */}
                 </div>
                 <div className="flex justify-between items-center mt-4">
                     <h4 className="text-lg">Mine bonger</h4>

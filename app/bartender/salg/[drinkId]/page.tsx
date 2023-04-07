@@ -54,7 +54,8 @@ export default async function DrinkSalesPage({
     return (
         <div className="m-4 text-center">
             <h2>
-                Bekreft salg av {drink.name} for {drink.price} bonger
+                Bekreft salg av {drink.name} for{" "}
+                {drink.happyHour ? drink.price - 1 : drink.price} bonger
             </h2>
             <h4>til</h4>
             <h3 className="text-2xl">{user.name}</h3>

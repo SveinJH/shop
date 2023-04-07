@@ -28,10 +28,12 @@ export async function createTransaction(userId: string, drinkId: string) {
 
     const [user, drink] = await Promise.all([userPromise, drinkPromise]);
 
-    if (user && drink && user.coupons >= drink.price) {
+    const price = drink?.happyHour ? drink.price - 1 : drink?.price ?? 10;
+
+    if (user && drink && user.coupons >= price) {
         const updateUser = db.user.update({
             where: { id: userId },
-            data: { coupons: { decrement: drink.price } },
+            data: { coupons: { decrement: price } },
         });
         const createTransaction = db.transaction.create({
             data: {
