@@ -36,8 +36,8 @@ const navigationItems: NavigationItem[] = [
         Icon: <ClockIcon className="h-16 text-yellow-600" />,
     },
     {
-        text: "Kuponger",
-        href: "/hjem/kuponger",
+        text: "Bonger",
+        href: "/hjem/bonger",
         Icon: <ShoppingBagIcon className="h-16 text-yellow-600" />,
     },
 ];
@@ -51,7 +51,7 @@ export default async function HomePage() {
                         <Link
                             key={navItem.text}
                             href={navItem.href}
-                            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
+                            className="block max-w-sm p-6 bg-gray-800 border border-gray-700 rounded-lg shadow hover:bg-gray-700 text-center"
                         >
                             <div className="flex flex-col justify-center">
                                 <>

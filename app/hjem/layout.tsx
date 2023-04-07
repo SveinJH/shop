@@ -34,7 +34,7 @@ export default async function HomeLayout({
                     {/* <QRButton id={session.user.id} /> */}
                 </div>
                 <div className="flex justify-between items-center mt-4">
-                    <h4 className="text-lg">Mine kuponger</h4>
+                    <h4 className="text-lg">Mine bonger</h4>
                     <p className="text-2xl">{coupons}</p>
                 </div>
             </section>

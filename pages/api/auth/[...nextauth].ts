@@ -13,8 +13,7 @@ export const authOptions: NextAuthOptions = {
             idToken: true,
             name: "Vipps",
             type: "oauth",
-            wellKnown:
-                "https://api.vipps.no/access-management-1.0/access/.well-known/openid-configuration",
+            wellKnown: process.env.VIPPS_WELLKNOWN_URL as string,
             authorization: {
                 params: { scope: "openid phoneNumber name" },
             },
@@ -33,7 +32,7 @@ export const authOptions: NextAuthOptions = {
             userinfo: {
                 async request(context) {
                     const data = await fetch(
-                        "https://api.vipps.no/vipps-userinfo-api/userinfo",
+                        process.env.VIPPS_USERINFO_URL as string,
                         {
                             headers: {
                                 authorization: `Bearer ${context.tokens.access_token}`,
@@ -48,9 +47,8 @@ export const authOptions: NextAuthOptions = {
             },
         },
     ],
-    // debug: true,
     callbacks: {
-        async redirect({ url, baseUrl }) {
+        async redirect() {
             return "/hjem";
         },
         async session({ session, token, user }) {

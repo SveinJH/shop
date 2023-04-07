@@ -34,7 +34,7 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
                         >
                             <h3 className="text-lg mb-1">{drink.name}</h3>
                             <h4 className="text-gray-300">
-                                {drink.price} kuponger
+                                {drink.price} bonger
                             </h4>
                         </button>
                     );
@@ -47,7 +47,7 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
                 >
                     <h2 className="text-3xl mb-2">{drink.name}</h2>
                     <h2 className="text-xl mb-8 font-bold">
-                        {drink.price} kuponger
+                        {drink.price} bonger
                     </h2>
                     <QRCode value={qrValue} />
                     <button

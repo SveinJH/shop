@@ -11,8 +11,7 @@ export default async function App() {
             <span className={styles.logo}>Nikkel</span>
             <main className={styles.main}>
                 <h1>
-                    Enkel administrering av kuponger til ditt neste
-                    arrangmenent.
+                    Enkel administrering av bonger til ditt neste arrangmenent.
                 </h1>
                 <p>Kom i gang ved å logge inn</p>
             </main>

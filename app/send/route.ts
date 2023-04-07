@@ -1,13 +1,13 @@
 import { db } from "@/utils/db";
 import { NextResponse } from "next/server";
 
-type CreateTransactionRequest = {
+type SendCouponsRequest = {
     userId?: string;
     amount?: number;
 };
 
 export async function POST(request: Request) {
-    const { userId, amount }: CreateTransactionRequest = await request.json();
+    const { userId, amount }: SendCouponsRequest = await request.json();
 
     if (!userId || !amount) {
         return new Response("Feil", { status: 400 });

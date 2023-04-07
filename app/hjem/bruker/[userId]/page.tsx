@@ -1,5 +1,6 @@
 import { GiveCouponsButton } from "@/components/give-coupons-button";
 import { ListItem } from "@/components/list-item";
+import { SendCouponsButton } from "@/components/send-coupons-button";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { db } from "@/utils/db";
 import { getServerSession } from "next-auth";
@@ -50,7 +51,7 @@ export default async function UserPage({
                 </h3>
             )}
             <h3 className="text-xl">
-                {user.coupons} kuponger{" "}
+                {user.coupons} bonger{" "}
                 {session?.user.role === "admin" && (
                     <GiveCouponsButton
                         userId={params.userId}
@@ -58,7 +59,18 @@ export default async function UserPage({
                     />
                 )}
             </h3>
-            <h4 className="text-center text-lg mt-6">Drikkeoversikt</h4>
+            {typeof session?.user.coupons === "number" &&
+                session.user.coupons > -1 && (
+                    <SendCouponsButton
+                        myUserId={session.user.id}
+                        userId={params.userId}
+                    />
+                )}
+            <h4 className="text-center text-lg mt-8">
+                {transactions.length > 0
+                    ? "Drikkeoversikt"
+                    : "Har ikke drukket noe enda"}
+            </h4>
             <div>
                 {transactions.map((t, i) => (
                     <ListItem key={t.name} index={i}>

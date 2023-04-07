@@ -30,7 +30,14 @@ export const OverviewContent: React.FC<OverviewContentProps> = ({ users }) => {
                         <h3 className="text-sm">{user.name}</h3>
                         <h4 className="text-sm">
                             <span className="font-bold">{user.coupons}</span>{" "}
-                            kuponger
+                            bong
+                            <span
+                                className={`${
+                                    user.coupons === 1 && "invisible"
+                                }`}
+                            >
+                                er
+                            </span>
                         </h4>
                     </ListItem>
                 );

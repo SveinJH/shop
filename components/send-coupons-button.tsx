@@ -1,58 +1,60 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-type GiveCouponsButtonProps = {
+type SendCouponsButtonProps = {
+    myUserId: string;
     userId: string;
-    name: string | null;
 };
 
-export const GiveCouponsButton: React.FC<GiveCouponsButtonProps> = ({
+export const SendCouponsButton: React.FC<SendCouponsButtonProps> = ({
+    myUserId,
     userId,
-    name,
 }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [value, setValue] = useState("");
     const [isPending, startTransition] = useTransition();
+    const [error, setError] = useState("");
 
-    const handleSend = async () => {
+    const handleTransfer = async () => {
         if (value) {
             try {
+                setError("");
                 const amount = parseInt(value);
-                const isOk = await fetch("/send", {
+                const isOk = await fetch("/transfer", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        userId,
+                        toUserId: userId,
+                        fromUserId: myUserId,
                         amount,
                     }),
                 });
                 if (isOk.status === 200) {
+                    setValue("");
                     setShowModal(false);
                     startTransition(() => {
                         router.refresh();
                     });
+                } else {
+                    setError("Mislykket. Sjekk at du har nok kuponger å sende");
                 }
             } catch {}
         }
     };
 
     return (
-        <div>
+        <div className="mt-2">
             <button
-                className="bg-yellow-700 mt-2"
-                onClick={() => setShowModal(!showModal)}
+                className="bg-yellow-700 p-1 px-8"
+                onClick={() => setShowModal(true)}
             >
-                <PlusIcon className="h-8" />
+                Send bonger
             </button>
             {showModal && (
                 <div className="w-screen h-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-900 flex justify-center items-center flex-col">
-                    <h2 className="text-xl mb-4">
-                        Send{name && ` til ${name}`}
-                    </h2>
                     <input
                         className="text-gray-900 text-center py-2 text-2xl"
                         type="string"
@@ -61,7 +63,7 @@ export const GiveCouponsButton: React.FC<GiveCouponsButtonProps> = ({
                     />
                     <div>
                         <button
-                            onClick={handleSend}
+                            onClick={handleTransfer}
                             className="text-2xl mt-8 py-2 px-6 bg-green-700 mr-4"
                         >
                             Send
@@ -73,6 +75,7 @@ export const GiveCouponsButton: React.FC<GiveCouponsButtonProps> = ({
                             Lukk
                         </button>
                     </div>
+                    {error && <div className="mt-4 text-xl">{error}</div>}
                 </div>
             )}
         </div>

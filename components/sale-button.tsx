@@ -28,7 +28,7 @@ export const SaleButton: React.FC<SaleButtonProps> = ({
                 drinkId,
             }),
         });
-        if (isOk) {
+        if (isOk.status === 200) {
             setSuccessful(true);
             setTimeout(() => setSuccessful(false), 3000);
         }

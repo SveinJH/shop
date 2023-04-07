@@ -54,12 +54,12 @@ export default async function DrinkSalesPage({
     return (
         <div className="m-4 text-center">
             <h2>
-                Bekreft salg av {drink.name} for {drink.price} kuponger
+                Bekreft salg av {drink.name} for {drink.price} bonger
             </h2>
             <h4>til</h4>
             <h3 className="text-2xl">{user.name}</h3>
             <p className="text-sm my-4">
-                {user.name} har {user.coupons} kuponger
+                {user.name} har {user.coupons} bonger
             </p>
             <SellActions userId={user.id} drinkId={drink.id} />
         </div>
