@@ -21,7 +21,7 @@ export const SellActions: React.FC<SellActionsProps> = ({
     const handleSale = async () => {
         setIsLoading(true);
         setError("");
-        const isOk = await fetch("/transaction", {
+        const response = await fetch("/transaction", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -29,7 +29,7 @@ export const SellActions: React.FC<SellActionsProps> = ({
                 drinkId,
             }),
         });
-        if (isOk) {
+        if (response.status === 200) {
             setSuccessful(true);
             setTimeout(() => router.push("/hjem"), 2000);
         } else {
