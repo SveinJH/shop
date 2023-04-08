@@ -27,7 +27,8 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
         drink =>
             drink.name !== "Isbjørn Seltzer" &&
             drink.name !== "Blue Lagoon" &&
-            drink.name !== "Mojito"
+            drink.name !== "Mojito" &&
+            drink.name !== "Kopparberg Seltzer"
     );
 
     return (
