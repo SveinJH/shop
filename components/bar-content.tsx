@@ -25,7 +25,10 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
 
     const updatedDrinks = drinks?.filter(
         drink =>
-            drink.name !== "Moscow Mule" && drink.name !== "Isbjørn Seltzer"
+            drink.name !== "Moscow Mule" &&
+            drink.name !== "Isbjørn Seltzer" &&
+            drink.name !== "Blue Lagoon" &&
+            drink.name !== "Mojito"
     );
 
     return (
