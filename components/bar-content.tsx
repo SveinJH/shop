@@ -23,6 +23,8 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
 
     const happyHourDrinks = drinks?.filter(drink => drink.happyHour) ?? [];
 
+    const updatedDrinks = drinks?.filter(drink => drink.name !== "Moscow Mule");
+
     return (
         <>
             {happyHourDrinks.length > 0 && (
@@ -40,7 +42,7 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
                 </div>
             )}
             <div className="grid grid-cols-2 text-center gap-4 mx-4">
-                {drinks?.map(drink => {
+                {updatedDrinks?.map(drink => {
                     return (
                         <button
                             key={drink.id}
