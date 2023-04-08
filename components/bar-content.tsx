@@ -23,7 +23,10 @@ export const BarContent: React.FC<BarContentProps> = ({ drinks, userId }) => {
 
     const happyHourDrinks = drinks?.filter(drink => drink.happyHour) ?? [];
 
-    const updatedDrinks = drinks?.filter(drink => drink.name !== "Moscow Mule");
+    const updatedDrinks = drinks?.filter(
+        drink =>
+            drink.name !== "Moscow Mule" && drink.name !== "Isbjørn Seltzer"
+    );
 
     return (
         <>
