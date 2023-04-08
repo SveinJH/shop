@@ -1,5 +1,6 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function HomeLayout({
@@ -18,8 +19,11 @@ export default async function HomeLayout({
 
     return (
         <section>
-            <nav className="m-4">
+            <nav className="m-4 flex items-center justify-between">
                 <h1 className="text-3xl">Innflyttingsfiesta</h1>
+                <Link href="/hjem" className="bg-yellow-700 px-4 py-1">
+                    Hjem
+                </Link>
             </nav>
             <section className="m-4 my-6 border border-gray-200 p-4 rounded-lg shadow bg-gray-900">
                 <div className="flex justify-between">
