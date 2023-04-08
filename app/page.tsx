@@ -14,6 +14,7 @@ export default async function App() {
                     Enkel administrering av bonger til ditt neste arrangmenent.
                 </h1>
                 <p>Kom i gang ved å logge inn</p>
+                <Link href="/logg-inn">Logg inn</Link>
             </main>
             <div>
                 <h2>UNDER DEVELOPMENT</h2>

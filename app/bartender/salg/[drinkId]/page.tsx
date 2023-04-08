@@ -34,16 +34,20 @@ export default async function DrinkSalesPage({
 }) {
     const session = await getServerSession(authOptions);
 
+    if (!session) {
+        redirect("/logg-inn");
+    }
+
     const role = session?.user.role;
 
     if (role !== "bartender" && role !== "admin") {
-        redirect("/");
+        redirect("/hjem");
     }
 
     const userId = searchParams["id"];
 
     if (!userId || typeof userId !== "string") {
-        redirect("/");
+        redirect("/hjem");
     }
 
     const user = await getUser(userId);

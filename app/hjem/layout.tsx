@@ -11,7 +11,7 @@ export default async function HomeLayout({
     console.log("session", session);
 
     if (!session || !session.user) {
-        redirect("/");
+        redirect("/logg-inn");
     }
 
     const { coupons, role, name } = session.user;
