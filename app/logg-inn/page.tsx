@@ -20,6 +20,7 @@ export default function LoginPage() {
                     height={40}
                     width={230}
                     alt="vipps login button"
+                    priority
                 />
             </button>
         </div>
